@@ -30,14 +30,14 @@ ciphertext = pow(m0, e, n)
 m1 = pow(ciphertext, d, n)
 print(bytes.fromhex(hex(m1)[2:]).decode())
 
-#Uh oh! Mallory got in the messed with Bob's message
+#Uh oh! Mallory messed with Bob's message
 c_prime = pow(ciphertext, e, n)
 
 #Alice decrypts the modified ciphertext from Mallory
 s = pow(c_prime, d, n)
 assert s == ciphertext
+#Now Mallory knows the key (the ciphertext sent by Bob)
 
-#Now Mallory knows the key
 temp = str(s).encode()
 sha = SHA256.new()
 sha.update(temp)
